@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router';
-import { ShoppingCart, User, LogIn, Menu, Wand2, LogOut, Settings, History, UserCircle } from 'lucide-react';
+import { ShoppingCart, User, LogIn, Menu, Wand2, LogOut, Settings, History, UserCircle, BookOpen } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -27,7 +27,7 @@ export function Header() {
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
             <Wand2 className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-semibold text-foreground">The AI Wizard</span>
+          <span className="text-xl font-semibold text-foreground">Prompt Wizard</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -104,6 +104,10 @@ export function Header() {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => navigate('/my-learning')} className="cursor-pointer py-2.5">
+                  <BookOpen className="mr-3 h-4 w-4" />
+                  <span>My Learning</span>
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/profile')} className="cursor-pointer py-2.5">
                   <Settings className="mr-3 h-4 w-4" />
                   <span>Settings</span>

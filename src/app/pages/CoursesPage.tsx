@@ -25,9 +25,9 @@ export function CoursesPage() {
     },
     {
       id: '2',
-      title: 'AI for Business: Complete Guide',
+      title: 'Advanced Prompt Patterns & Frameworks',
       instructor: 'Michael Chen',
-      description: 'Transform your business with practical AI applications and strategies',
+      description: 'Master chain-of-thought, few-shot, and role-based prompting strategies',
       price: 79.99,
       rating: 4.8,
       reviewCount: 423,
@@ -38,9 +38,9 @@ export function CoursesPage() {
     },
     {
       id: '3',
-      title: 'Midjourney: From Beginner to Pro',
+      title: 'Midjourney Prompting: From Beginner to Pro',
       instructor: 'Emma Davis',
-      description: 'Create stunning AI artwork and learn advanced image generation techniques',
+      description: 'Create stunning AI artwork by mastering image generation prompts',
       price: 59.99,
       rating: 4.9,
       reviewCount: 789,
@@ -51,9 +51,9 @@ export function CoursesPage() {
     },
     {
       id: '4',
-      title: 'Machine Learning Fundamentals',
+      title: 'Prompting for Developers: Code Generation',
       instructor: 'David Park',
-      description: 'Build a solid foundation in machine learning concepts and applications',
+      description: 'Write better code prompts for Copilot, Claude, and ChatGPT',
       price: 89.99,
       rating: 4.7,
       reviewCount: 634,
@@ -64,9 +64,9 @@ export function CoursesPage() {
     },
     {
       id: '5',
-      title: 'Natural Language Processing with Python',
+      title: 'Claude & GPT-4 Prompting Masterclass',
       instructor: 'Jessica Lee',
-      description: 'Master NLP techniques and build powerful language AI applications',
+      description: 'Deep dive into prompting the most powerful LLMs for maximum results',
       price: 94.99,
       rating: 4.8,
       reviewCount: 412,
@@ -77,9 +77,9 @@ export function CoursesPage() {
     },
     {
       id: '6',
-      title: 'AI-Powered Marketing Strategies',
+      title: 'Prompting for Marketing & Content Creation',
       instructor: 'Robert Taylor',
-      description: 'Leverage AI tools to create data-driven marketing campaigns',
+      description: 'Craft prompts that generate compelling copy, ads, and social media content',
       price: 69.99,
       rating: 4.9,
       reviewCount: 523,
@@ -90,9 +90,9 @@ export function CoursesPage() {
     },
     {
       id: '7',
-      title: 'Stable Diffusion Masterclass',
+      title: 'Stable Diffusion Prompt Craft',
       instructor: 'Amy Zhang',
-      description: 'Create professional-grade AI images with Stable Diffusion',
+      description: 'Master the art of writing prompts for Stable Diffusion image generation',
       price: 64.99,
       rating: 4.8,
       reviewCount: 391,
@@ -103,9 +103,9 @@ export function CoursesPage() {
     },
     {
       id: '8',
-      title: 'AI Ethics and Responsible Development',
+      title: 'Responsible AI Prompting & Ethics',
       instructor: 'Dr. James Wilson',
-      description: 'Understand the ethical implications and best practices in AI development',
+      description: 'Learn ethical prompting practices, bias mitigation, and safe AI usage',
       price: 54.99,
       rating: 4.7,
       reviewCount: 278,
@@ -116,9 +116,9 @@ export function CoursesPage() {
     },
     {
       id: '9',
-      title: 'Building AI Chatbots',
+      title: 'Building AI Chatbots with Prompt Design',
       instructor: 'Chris Martinez',
-      description: 'Design and deploy intelligent chatbots for business applications',
+      description: 'Design system prompts and conversation flows for intelligent chatbots',
       price: 74.99,
       rating: 4.8,
       reviewCount: 445,
@@ -134,9 +134,9 @@ export function CoursesPage() {
       {/* Header */}
       <div className="border-b bg-card">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold mb-4">AI Courses</h1>
+          <h1 className="text-3xl font-bold mb-4">Prompting Courses</h1>
           <p className="text-muted-foreground mb-6">
-            Learn from industry experts and master AI skills
+            Master the art of AI prompting with expert-led courses
           </p>
 
           {/* Search */}

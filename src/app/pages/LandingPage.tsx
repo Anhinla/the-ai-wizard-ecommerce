@@ -90,10 +90,10 @@ export function LandingPage() {
     },
     {
       id: "2",
-      title: "AI for Business: Complete Guide",
+      title: "Advanced Prompt Patterns & Frameworks",
       instructor: "Michael Chen",
       description:
-        "Transform your business with practical AI applications and strategies",
+        "Master chain-of-thought, few-shot, and role-based prompting strategies",
       price: 79.99,
       rating: 4.8,
       reviewCount: 423,
@@ -105,10 +105,10 @@ export function LandingPage() {
     },
     {
       id: "3",
-      title: "Midjourney: From Beginner to Pro",
+      title: "Midjourney Prompting: From Beginner to Pro",
       instructor: "Emma Davis",
       description:
-        "Create stunning AI artwork and learn advanced image generation techniques",
+        "Create stunning AI artwork by mastering image generation prompts",
       price: 59.99,
       rating: 4.9,
       reviewCount: 789,
@@ -213,7 +213,7 @@ export function LandingPage() {
       name: "Michael Chen",
       role: "Startup Founder",
       content:
-        "The AI Wizard helped me bootstrap my startup with limited resources. Absolutely game-changing!",
+        "The Prompt Wizard helped me bootstrap my startup with limited resources. Absolutely game-changing!",
       rating: 5,
       image:
         "https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjB0ZWFtJTIwYnJhaW5zdG9ybWluZ3xlbnwxfHx8fDE3NzQ4NDAyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -270,12 +270,12 @@ export function LandingPage() {
                 </span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Discover Powerful AI Prompts & Courses
+                Discover Powerful AI Prompts & Prompting Courses
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8">
                 Unlock the full potential of AI with our curated
                 marketplace of premium prompts and expert-led
-                courses designed for creators, developers, and
+                prompting courses designed for creators, developers, and
                 marketers.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -658,7 +658,7 @@ export function LandingPage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">
-                See The AI Wizard in Action
+                See Prompt Wizard in Action
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Watch how our platform helps creators transform

@@ -36,7 +36,7 @@ export function LoginPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
               <Wand2 className="h-6 w-6 text-primary-foreground" />
             </div>
-            <span className="text-xl font-semibold text-foreground">The AI Wizard</span>
+            <span className="text-xl font-semibold text-foreground">Prompt Wizard</span>
           </Link>
         </div>
 

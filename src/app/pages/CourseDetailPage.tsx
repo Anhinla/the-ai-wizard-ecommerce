@@ -189,12 +189,14 @@ export function CourseDetailPage() {
               <div className="text-4xl font-bold mb-6">${course.price}</div>
 
               <div className="space-y-3 mb-6">
-                <Button className="w-full bg-primary hover:bg-primary/90" size="lg">
-                  <ShoppingCart className="mr-2 h-5 w-5" />
-                  Add to Cart
+                <Button className="w-full bg-primary hover:bg-primary/90" size="lg"
+                  onClick={() => navigate(`/my-learning/${id}`)}>
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Start Learning
                 </Button>
                 <Button className="w-full" variant="outline" size="lg">
-                  Buy Now
+                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  Add to Cart
                 </Button>
               </div>
 

@@ -163,8 +163,8 @@ export function PurchaseHistoryPage() {
           {/* Invoice Header */}
           <div className="flex items-start justify-between pb-6 border-b">
             <div>
-              <h3 className="text-2xl font-bold text-primary mb-1">The AI Wizard</h3>
-              <p className="text-sm text-muted-foreground">AI Marketplace Platform</p>
+              <h3 className="text-2xl font-bold text-primary mb-1">Prompt Wizard</h3>
+              <p className="text-sm text-muted-foreground">Prompt Marketplace Platform</p>
               <p className="text-sm text-muted-foreground">support@aiwizard.com</p>
             </div>
             <div className="text-right">

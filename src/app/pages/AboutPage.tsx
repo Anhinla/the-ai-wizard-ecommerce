@@ -74,7 +74,7 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2023', event: 'The AI Wizard was founded in a small enchanted workshop', icon: Wand2 },
+  { year: '2023', event: 'Prompt Wizard was founded in a small enchanted workshop', icon: Wand2 },
   { year: '2024', event: 'Reached 10,000 wizards in our community guild', icon: Users },
   { year: '2025', event: 'Launched 500+ premium prompts and 50+ courses', icon: BookOpen },
   { year: '2026', event: 'Expanded globally with creators from 80+ realms', icon: Globe },
@@ -116,7 +116,7 @@ export function AboutPage() {
             </Badge>
             <h1 className="text-5xl font-bold mb-6">
               The <span className="text-primary">Magic</span> Behind{' '}
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">The AI Wizard</span>
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Prompt Wizard</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               We're on a quest to make AI accessible, powerful, and enchanting for creators,
@@ -171,7 +171,7 @@ export function AboutPage() {
               </h2>
               <p className="text-muted-foreground mb-4">
                 In a world where AI is reshaping every industry, we believe that the right prompts
-                are like the right spells — they unlock incredible power. The AI Wizard was born from
+                are like the right spells — they unlock incredible power. Prompt Wizard was born from
                 a simple idea: create a marketplace where anyone can find, share, and master the art
                 of AI prompting.
               </p>
@@ -288,7 +288,7 @@ export function AboutPage() {
             </Badge>
             <h2 className="text-3xl font-bold mb-4">Meet Our <span className="text-primary">Archmages</span></h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              The masterminds behind the spells, potions, and enchantments that power The AI Wizard.
+              The masterminds behind the spells, potions, and enchantments that power Prompt Wizard.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">

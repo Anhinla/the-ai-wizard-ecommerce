@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
 const sections = [
   {
     title: '1. Acceptance of Terms',
-    content: 'By accessing or using The AI Wizard marketplace, you agree to be bound by these Terms of Service. If you do not agree, please do not use our platform. These terms apply to all users, including buyers, sellers, and visitors.',
+    content: 'By accessing or using the Prompt Wizard marketplace, you agree to be bound by these Terms of Service. If you do not agree, please do not use our platform. These terms apply to all users, including buyers, sellers, and visitors.',
   },
   {
     title: '2. Account Registration',
@@ -26,11 +26,11 @@ const sections = [
   },
   {
     title: '6. Seller Terms',
-    content: 'Creators who sell on our marketplace grant The AI Wizard a non-exclusive license to display and distribute their content. Sellers are responsible for ensuring their content does not infringe on third-party rights. Revenue sharing and payout terms are outlined in the Seller Agreement.',
+    content: 'Creators who sell on our marketplace grant Prompt Wizard a non-exclusive license to display and distribute their content. Sellers are responsible for ensuring their content does not infringe on third-party rights. Revenue sharing and payout terms are outlined in the Seller Agreement.',
   },
   {
     title: '7. Limitation of Liability',
-    content: 'The AI Wizard is provided "as is" without warranties of any kind. We are not liable for any indirect, incidental, or consequential damages arising from your use of the platform. Our total liability shall not exceed the amount you have paid us in the preceding 12 months.',
+    content: 'Prompt Wizard is provided "as is" without warranties of any kind. We are not liable for any indirect, incidental, or consequential damages arising from your use of the platform. Our total liability shall not exceed the amount you have paid us in the preceding 12 months.',
   },
   {
     title: '8. Modifications',
@@ -60,7 +60,7 @@ export function TermsPage() {
 
         <Card className="p-8 space-y-8">
           <p className="text-muted-foreground">
-            Welcome to The AI Wizard. These terms govern your use of our marketplace, services,
+            Welcome to Prompt Wizard. These terms govern your use of our marketplace, services,
             and any related tools or content provided through our platform.
           </p>
           {sections.map((section, i) => (

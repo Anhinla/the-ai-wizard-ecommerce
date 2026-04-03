@@ -56,7 +56,7 @@ export function PrivacyPage() {
 
         <Card className="p-8 space-y-8">
           <p className="text-muted-foreground">
-            At The AI Wizard, we take your privacy seriously. This policy explains how we collect,
+            At Prompt Wizard, we take your privacy seriously. This policy explains how we collect,
             use, and protect your personal information when you use our marketplace and services.
           </p>
           {sections.map((section, i) => (

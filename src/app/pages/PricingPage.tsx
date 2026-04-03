@@ -64,10 +64,10 @@ export function PricingPage() {
           {plans.map((plan) => (
             <Card
               key={plan.name}
-              className={`p-8 ${plan.popular ? 'border-primary shadow-lg ring-2 ring-primary' : ''}`}
+              className={`p-8 relative ${plan.popular ? 'border-primary shadow-lg ring-2 ring-primary' : ''}`}
             >
               {plan.popular && (
-                <Badge className="mb-4 bg-primary">Most Popular</Badge>
+                <Badge className="absolute -top-3 right-6 bg-primary">Most Popular</Badge>
               )}
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 mb-4">
                 <plan.icon className="h-7 w-7 text-primary" />

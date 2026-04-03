@@ -12,10 +12,10 @@ export function Footer() {
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
                 <Wand2 className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-semibold text-foreground">The AI Wizard</span>
+              <span className="text-xl font-semibold text-foreground">Prompt Wizard</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
-              Discover powerful AI prompts and courses to supercharge your creativity and productivity.
+              Discover powerful AI prompts and prompting courses to supercharge your creativity and productivity.
             </p>
             <div className="flex gap-3">
               <a
@@ -43,7 +43,7 @@ export function Footer() {
                 <Linkedin className="h-4 w-4" />
               </a>
               <a
-                href="mailto:hello@aimarketplace.com"
+                href="mailto:hello@promptwizard.com"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border hover:bg-accent transition-colors"
               >
                 <Mail className="h-4 w-4" />
@@ -62,7 +62,7 @@ export function Footer() {
               </li>
               <li>
                 <Link to="/courses" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Courses
+                  Prompting Courses
                 </Link>
               </li>
               <li>
@@ -110,7 +110,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t">
           <p className="text-center text-sm text-muted-foreground">
-            © 2026 The AI Wizard. All rights reserved.
+            © 2026 Prompt Wizard. All rights reserved.
           </p>
         </div>
       </div>

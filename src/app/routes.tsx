@@ -17,6 +17,8 @@ import { ProfilePage } from './pages/ProfilePage';
 import { AboutPage } from './pages/AboutPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
+import { MyLearningPage } from './pages/MyLearningPage';
+import { CourseLearningPage } from './pages/CourseLearningPage';
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +40,12 @@ export const router = createBrowserRouter([
       { path: 'about', Component: AboutPage },
       { path: 'privacy', Component: PrivacyPage },
       { path: 'terms', Component: TermsPage },
+      { path: 'my-learning', Component: MyLearningPage },
     ],
+  },
+  {
+    path: '/my-learning/:id',
+    Component: CourseLearningPage,
   },
   {
     path: '/login',
