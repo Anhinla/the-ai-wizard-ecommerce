@@ -86,7 +86,7 @@ export function SuccessPage() {
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => navigate(`/learning/${item.id}`)}
+                    onClick={() => navigate(`/my-learning/${item.id}`)}
                   >
                     <ArrowRight className="h-4 w-4 mr-1" />
                     Access

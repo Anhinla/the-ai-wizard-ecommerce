@@ -1,21 +1,32 @@
-import { Star, Clock, Users, BookOpen } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
-import { Badge } from './ui/badge';
-import { useNavigate } from 'react-router';
+import {
+  Star,
+  Clock,
+  Users,
+  BookOpen,
+  ShoppingCart,
+  Check,
+  PlayCircle,
+} from "lucide-react"
+import { Button } from "./ui/button"
+import { Card } from "./ui/card"
+import { Badge } from "./ui/badge"
+import { useNavigate } from "react-router"
 
 interface CourseCardProps {
-  id: string;
-  title: string;
-  instructor: string;
-  description: string;
-  price: number;
-  rating: number;
-  reviewCount: number;
-  duration: string;
-  students: number;
-  level: string;
-  imageUrl: string;
+  id: string
+  title: string
+  instructor: string
+  description: string
+  price: number
+  rating: number
+  reviewCount: number
+  duration: string
+  students: number
+  level: string
+  imageUrl: string
+  // BỔ SUNG 2 PROPS TRẠNG THÁI
+  isInCart?: boolean
+  isOwned?: boolean
 }
 
 export function CourseCard({
@@ -30,11 +41,69 @@ export function CourseCard({
   students,
   level,
   imageUrl,
+  isInCart = false, // Giá trị mặc định
+  isOwned = false, // Giá trị mặc định
 }: CourseCardProps) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
+  // Hàm xử lý render nút bấm tuỳ theo trạng thái
+  const renderActionButton = () => {
+    // Trạng thái 1: Đã mua -> Nút học ngay
+    if (isOwned) {
+      return (
+        <Button
+          size="sm"
+          className="bg-green-600 hover:bg-green-700 text-white"
+          onClick={(e) => {
+            e.stopPropagation() // Ngăn click nhầm
+            navigate(`/my-learning/${id}`)
+          }}
+        >
+          <PlayCircle className="h-4 w-4 mr-1" />
+          Start Learning
+        </Button>
+      )
+    }
+
+    // Trạng thái 2: Nằm trong giỏ hàng -> Nút đi tới giỏ hàng
+    if (isInCart) {
+      return (
+        <Button
+          size="sm"
+          variant="outline"
+          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+          onClick={(e) => {
+            e.stopPropagation()
+            navigate("/cart")
+          }}
+        >
+          <Check className="h-4 w-4 mr-1" />
+          In Cart
+        </Button>
+      )
+    }
+
+    // Trạng thái 3: Mặc định (Chưa mua, chưa có trong giỏ) -> Nút Enroll (Xem chi tiết)
+    return (
+      <Button
+        size="sm"
+        className="bg-primary hover:bg-primary/90"
+        onClick={(e) => {
+          e.stopPropagation()
+          navigate(`/courses/${id}`)
+        }}
+      >
+        <BookOpen className="h-4 w-4 mr-1" />
+        Enroll
+      </Button>
+    )
+  }
 
   return (
-    <Card className="group overflow-hidden border-border bg-card hover:shadow-lg transition-all duration-300">
+    <Card
+      className="group overflow-hidden border-border bg-card hover:shadow-lg transition-all duration-300 cursor-pointer"
+      onClick={() => navigate(`/courses/${id}`)}
+    >
       {/* Image */}
       <div className="relative h-48 overflow-hidden bg-muted">
         <img
@@ -53,13 +122,17 @@ export function CourseCard({
           {title}
         </h3>
         <p className="text-sm text-muted-foreground mb-3">by {instructor}</p>
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{description}</p>
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+          {description}
+        </p>
 
         {/* Stats */}
         <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <Star className="h-4 w-4 fill-secondary text-secondary" />
-            <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
+            <span className="font-medium text-foreground">
+              {rating.toFixed(1)}
+            </span>
             <span>({reviewCount})</span>
           </div>
           <div className="flex items-center gap-1">
@@ -77,16 +150,11 @@ export function CourseCard({
           <div className="flex items-baseline gap-1">
             <span className="text-2xl font-bold text-foreground">${price}</span>
           </div>
-          <Button
-            size="sm"
-            className="bg-primary hover:bg-primary/90"
-            onClick={() => navigate(`/courses/${id}`)}
-          >
-            <BookOpen className="h-4 w-4 mr-1" />
-            Enroll
-          </Button>
+
+          {/* Nút bấm được render tự động */}
+          {renderActionButton()}
         </div>
       </div>
     </Card>
-  );
+  )
 }

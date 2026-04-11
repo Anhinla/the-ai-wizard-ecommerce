@@ -28,24 +28,24 @@ import {
 export function PromptsPage() {
   const navigate = useNavigate()
 
-  // UI States
+
   const [searchQuery, setSearchQuery] = useState("")
   const [showFilters, setShowFilters] = useState(true)
 
-  // Data States
+
   const [prompts, setPrompts] = useState<PromptProps[]>([])
   const [loading, setLoading] = useState(true)
 
-  // Pagination States
+  
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
 
-  // Filter States
+
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [minVote, setMinVote] = useState<number>(0)
   const [sortOption, setSortOption] = useState<string>("Popularity")
 
-  // Fetch API
+
   useEffect(() => {
     const fetchPromptsData = async () => {
       setLoading(true)

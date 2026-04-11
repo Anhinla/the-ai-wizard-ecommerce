@@ -530,7 +530,7 @@ export function CourseDetailPage() {
                       <Button
                         className="w-full bg-green-600 hover:bg-green-700 text-white"
                         size="lg"
-                        onClick={() => navigate(`/learning/${course.courseId}`)}
+                        onClick={() => navigate(`/my-learning/${course.courseId}`)}
                       >
                         <PlayCircle className="mr-2 h-5 w-5" />
                         Go to Learning

@@ -79,7 +79,7 @@ export function ProfilePage() {
               <div className="flex-1 pt-4">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
-                    <h1 className="text-3xl font-bold mb-2">Mars</h1>
+                    <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
                     <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Mail className="h-4 w-4" />
@@ -89,10 +89,7 @@ export function ProfilePage() {
                         <Calendar className="h-4 w-4" />
                         <span className="text-sm">Joined March 2026</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        <span className="text-sm">San Francisco, CA</span>
-                      </div>
+              
                     </div>
                   </div>
                   <div className="flex gap-3">

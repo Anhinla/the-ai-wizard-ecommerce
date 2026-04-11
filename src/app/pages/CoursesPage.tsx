@@ -199,10 +199,12 @@ export function CoursesPage() {
                     price={course.price}
                     rating={course.vote}
                     reviewCount={0}
-                    duration={`${course.duration}m`} // Mình đổi thành m vì duration trong DB của bạn có vẻ là phút (vd: 110)
+                    duration={`${course.duration}m`}
                     students={course.purchasedCount}
                     level={course.category}
                     imageUrl={course.coverUrl}
+                    isInCart={course.isInCart}
+                    isOwned={course.isOwned}
                   />
                 ))}
               </div>

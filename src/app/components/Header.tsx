@@ -1,6 +1,17 @@
-import { Link, useNavigate } from 'react-router';
-import { ShoppingCart, User, LogIn, Menu, Wand2, LogOut, Settings, History, UserCircle, BookOpen } from 'lucide-react';
-import { Button } from './ui/button';
+import { Link, useNavigate } from "react-router"
+import {
+  ShoppingCart,
+  User,
+  LogIn,
+  Menu,
+  Wand2,
+  LogOut,
+  Settings,
+  History,
+  UserCircle,
+  BookOpen,
+} from "lucide-react"
+import { Button } from "./ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,17 +19,53 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Badge } from './ui/badge';
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { forceLogout } from '../api/client';
+} from "./ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Badge } from "./ui/badge"
+import { useState, useEffect } from "react"
+import { useAuth } from "../context/AuthContext"
+import { forceLogout } from "../api/client"
 
 export function Header() {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user')||'{}')
-  const [cartCount] = useState(3);
+  const navigate = useNavigate()
+
+
+  const { user, token } = useAuth()
+
+  const [cartCount, setCartCount] = useState(0)
+
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      if (!user || !token) {
+        console.log("No user or token found, skipping cart fetch.")
+        return
+      }
+
+      try {
+        const response = await fetch("http://localhost:3000/api/cart/count", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        const data = await response.json()
+
+        console.log("Cart API Response:", data)
+
+        if (data.success) {
+          setCartCount(data.payload.count)
+        } else {
+          console.error("Backend returned an error:", data.message)
+        }
+      } catch (error) {
+        console.error("Failed to fetch cart count:", error)
+      }
+    }
+
+    fetchCartCount()
+  }, [user, token])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
@@ -28,7 +75,9 @@ export function Header() {
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
             <Wand2 className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-semibold text-foreground">Prompt Wizard</span>
+          <span className="text-xl font-semibold text-foreground">
+            Prompt Wizard
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -60,7 +109,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             className="relative"
-            onClick={() => navigate('/cart')}
+            onClick={() => navigate("/cart")}
           >
             <ShoppingCart className="h-5 w-5" />
             {cartCount > 0 && (
@@ -74,7 +123,10 @@ export function Header() {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
+                <Button
+                  variant="ghost"
+                  className="relative h-10 w-10 rounded-full p-0"
+                >
                   <Avatar className="h-10 w-10 border-2 border-primary/20">
                     <AvatarImage src={user?.avatar} alt={user?.name} />
                     <AvatarFallback className="bg-primary text-primary-foreground">
@@ -94,25 +146,39 @@ export function Header() {
                     </Avatar>
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-semibold">{user?.name}</p>
-                      <p className="text-xs text-muted-foreground">{user?.email}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {user?.email}
+                      </p>
                     </div>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate('/my-learning')} className="cursor-pointer py-2.5">
+                <DropdownMenuItem
+                  onClick={() => navigate("/my-learning")}
+                  className="cursor-pointer py-2.5"
+                >
                   <BookOpen className="mr-3 h-4 w-4" />
                   <span>My Learning</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/profile')} className="cursor-pointer py-2.5">
+                <DropdownMenuItem
+                  onClick={() => navigate("/profile")}
+                  className="cursor-pointer py-2.5"
+                >
                   <Settings className="mr-3 h-4 w-4" />
                   <span>Settings</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/history')} className="cursor-pointer py-2.5">
+                <DropdownMenuItem
+                  onClick={() => navigate("/history")}
+                  className="cursor-pointer py-2.5"
+                >
                   <History className="mr-3 h-4 w-4" />
                   <span>Purchase History</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={forceLogout} className="cursor-pointer py-2.5 text-destructive focus:text-destructive">
+                <DropdownMenuItem
+                  onClick={forceLogout}
+                  className="cursor-pointer py-2.5 text-destructive focus:text-destructive"
+                >
                   <LogOut className="mr-3 h-4 w-4" />
                   <span>Logout</span>
                 </DropdownMenuItem>
@@ -120,10 +186,10 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <div className="hidden md:flex items-center gap-2">
-              <Button variant="ghost" onClick={() => navigate('/login')}>
+              <Button variant="ghost" onClick={() => navigate("/login")}>
                 Login
               </Button>
-              <Button onClick={() => navigate('/signup')}>Sign Up</Button>
+              <Button onClick={() => navigate("/signup")}>Sign Up</Button>
             </div>
           )}
 
@@ -134,5 +200,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }

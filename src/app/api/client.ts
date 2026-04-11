@@ -32,6 +32,7 @@ export const apiClientOrder = axios.create({
     "Content-Type": "application/json",
   },
 })
+
 export interface APIResponse<T = any> {
   success: boolean
   code: number
@@ -47,34 +48,28 @@ export interface PaginatedPayload<T> {
   extra?: Record<string, any>
 }
 
-
+// ✅ Sửa lại forceLogout
 export const forceLogout = () => {
   localStorage.removeItem("user")
+  localStorage.removeItem("token")
   window.location.href = "/login"
 }
 
+// ✅ Sửa lại requestInterceptor
 const requestInterceptor = (config: InternalAxiosRequestConfig) => {
-  const userDataString = localStorage.getItem("user")
-  if (userDataString) {
-    try {
-      const userData = JSON.parse(userDataString)
-      const token = userData.token
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-      }
-    } catch (error) {
-      console.error("Error parsing JSON from Local Storage:", error)
-    }
+  const token = localStorage.getItem("token")
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 }
-
 
 apiClientUser.interceptors.request.use(requestInterceptor)
 apiClientCourse.interceptors.request.use(requestInterceptor)
 apiClientPrompt.interceptors.request.use(requestInterceptor)
 apiClientCart.interceptors.request.use(requestInterceptor)
 apiClientOrder.interceptors.request.use(requestInterceptor)
+
 const responseInterceptorSuccess = (response: any) => {
   if (response.data && response.data.message === "token-expired") {
     forceLogout()
@@ -82,7 +77,6 @@ const responseInterceptorSuccess = (response: any) => {
   return response
 }
 
-// 4. Xử lý Response lỗi (Bắt HTTP status 401)
 const responseInterceptorError = (error: AxiosError<any>) => {
   if (
     error.response?.status === 401 ||
@@ -93,7 +87,6 @@ const responseInterceptorError = (error: AxiosError<any>) => {
 
   return Promise.reject(error)
 }
-
 
 apiClientUser.interceptors.response.use(
   responseInterceptorSuccess,

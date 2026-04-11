@@ -6,10 +6,14 @@ import { Label } from "../components/ui/label"
 import { Checkbox } from "../components/ui/checkbox"
 import { Card } from "../components/ui/card"
 import { Wand2, AlertCircle } from "lucide-react"
-import { login } from "../api/auth"
+// IMPORT SỬA ĐỔI: Gọi useAuth thay vì gọi thẳng API
+import { useAuth } from "../context/AuthContext"
 
 export function LoginPage() {
   const navigate = useNavigate()
+  // LẤY HÀM LOGIN TỪ CONTEXT
+  const { login } = useAuth()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -21,23 +25,13 @@ export function LoginPage() {
     setError("")
 
     try {
-      const response = await login({
-        email: email,
-        password: password,
-      })
+      // GỌI HÀM LOGIN CỦA CONTEXT (Nó sẽ tự lo việc gọi API, set state và lưu LocalStorage)
+      await login(email, password)
 
-      if (response && response.success) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            ...response.payload.user,
-            token: response.payload.token,
-          }),
-        )
-
-        navigate("/")
-      }
+      // Đăng nhập thành công thì chuyển về trang chủ
+      navigate("/")
     } catch (err: any) {
+      // Lấy lỗi từ API ném ra bên AuthContext
       setError(
         err.response?.data?.message ||
           err.message ||

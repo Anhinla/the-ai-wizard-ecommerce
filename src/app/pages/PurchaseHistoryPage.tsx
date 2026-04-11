@@ -352,7 +352,7 @@ export function PurchaseHistoryPage() {
                             <Button
                               size="sm"
                               className="w-full sm:w-auto"
-                              onClick={() => navigate(`/learning/${item.id}`)}
+                              onClick={() => navigate(`/my-learning/${item.id}`)}
                             >
                               <BookOpen className="h-4 w-4 mr-2" />
                               Go to Course
