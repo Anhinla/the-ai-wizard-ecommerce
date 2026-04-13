@@ -39,7 +39,7 @@ export function Chatbot() {
   ]
 
   // Lấy API URL từ env
-  const API_URL =  "http://localhost:3000"
+  const API_URL = "https://prompt-wizzard-be.onrender.com"
 
   const handleSend = async (textToSend?: string) => {
     const userMessage = textToSend || input.trim()
