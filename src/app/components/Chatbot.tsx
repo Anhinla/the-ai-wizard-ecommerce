@@ -5,7 +5,7 @@ import { Card } from "./ui/card"
 import { Input } from "./ui/input"
 import { motion, AnimatePresence } from "motion/react"
 import ReactMarkdown from "react-markdown"
-import { Link } from "react-router" // Sử dụng Link của react-router để chuyển trang mượt mà
+import { Link } from "react-router-dom" 
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
@@ -191,13 +191,13 @@ export function Chatbot() {
                             <li className="mb-1" {...props} />
                           ),
                           a: ({ node, href, ...props }) => {
-                            // Bắt link nội bộ và dùng react-router Link để chuyển trang
+                          
                             if (href?.startsWith("/")) {
                               return (
                                 <Link
                                   to={href}
                                   className="text-blue-600 hover:text-blue-800 underline font-medium transition-colors"
-                                  onClick={() => setIsOpen(false)} // Tự động đóng chat khi click link
+                                  onClick={() => setIsOpen(false)} 
                                   {...(props as any)}
                                 />
                               )

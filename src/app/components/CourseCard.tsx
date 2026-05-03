@@ -10,7 +10,7 @@ import {
 import { Button } from "./ui/button"
 import { Card } from "./ui/card"
 import { Badge } from "./ui/badge"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 
 interface CourseCardProps {
   id: string

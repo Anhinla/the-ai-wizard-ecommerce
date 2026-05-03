@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { PromptCard } from "../components/PromptCard";
 import { CourseCard } from "../components/CourseCard";

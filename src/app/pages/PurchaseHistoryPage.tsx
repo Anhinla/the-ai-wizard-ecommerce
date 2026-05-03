@@ -26,7 +26,7 @@ import {
 } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion } from "motion/react"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 // Import API của bạn (điều chỉnh đường dẫn cho phù hợp)
 import { getOrders, getOrderById } from "../api/order"
 

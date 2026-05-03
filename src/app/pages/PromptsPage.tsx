@@ -10,7 +10,7 @@ import {
   Sparkles,
 } from "lucide-react"
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router" // Thêm navigate để chuyển trang
+import { useNavigate } from "react-router-dom" // Thêm navigate để chuyển trang
 
 // Import API
 import { getPrompts, PromptProps, PromptParams } from "../api/prompt"
