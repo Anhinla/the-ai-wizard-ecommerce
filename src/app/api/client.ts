@@ -33,6 +33,12 @@ export const apiClientOrder = axios.create({
   },
 })
 
+export const apiClientVNPay = axios.create({
+  baseURL: `https://prompt-wizzard-be.onrender.com/api/vnpay/`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
 export interface APIResponse<T = any> {
   success: boolean
   code: number
@@ -69,7 +75,7 @@ apiClientCourse.interceptors.request.use(requestInterceptor)
 apiClientPrompt.interceptors.request.use(requestInterceptor)
 apiClientCart.interceptors.request.use(requestInterceptor)
 apiClientOrder.interceptors.request.use(requestInterceptor)
-
+apiClientVNPay.interceptors.request.use(requestInterceptor)
 const responseInterceptorSuccess = (response: any) => {
   if (response.data && response.data.message === "token-expired") {
     forceLogout()
@@ -107,6 +113,11 @@ apiClientCart.interceptors.response.use(
   responseInterceptorError,
 )
 apiClientOrder.interceptors.response.use(
+  responseInterceptorSuccess,
+  responseInterceptorError,
+)
+
+apiClientVNPay.interceptors.response.use(
   responseInterceptorSuccess,
   responseInterceptorError,
 )

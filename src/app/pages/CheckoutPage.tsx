@@ -3,9 +3,9 @@ import { useNavigate } from "react-router"
 import { Button } from "../components/ui/button"
 import { Card } from "../components/ui/card"
 import { Separator } from "../components/ui/separator"
-import { Lock, Loader2 } from "lucide-react"
+import { Lock, Loader2, CreditCard, Wallet } from "lucide-react"
 import { getCart, CartProps } from "../api/cart"
-import { apiClientCart } from "../api/client"
+import { apiClientCart, apiClientVNPay } from "../api/client"
 
 // Import Stripe
 import { loadStripe } from "@stripe/stripe-js"
@@ -16,7 +16,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 
-// Thay bằng Publishable Key của bạn
+// Replace with your Stripe Publishable Key
 const stripePromise = loadStripe(
   "pk_test_51TQNyoRtGEksMAemEJGSdoQkwm0OqYGAqynUqntQ74qfDGxVCFDoo0FdLtHZQ7aiBnLXTyutYol4IN60ppKPv5aq00joxiFOWO",
 )
@@ -44,36 +44,27 @@ const CheckoutForm = ({
     try {
       const cardElement = elements.getElement(CardElement)
 
-      // 1. LẤY EMAIL TỪ LOCAL STORAGE
-      let userEmail = ""
-      const userStr = localStorage.getItem("user") // Thay "user" bằng key bạn dùng để lưu thông tin đăng nhập
+      let userEmail = "customer@example.com"
+      const userStr = localStorage.getItem("user")
       if (userStr) {
         try {
           const userData = JSON.parse(userStr)
-          userEmail = userData.email
+          userEmail = userData.email || userEmail
         } catch (err) {
-          // Trường hợp bạn chỉ lưu mỗi chuỗi email trong localStorage
           userEmail = userStr
         }
       }
 
-      // Fallback nếu không có email để tránh lỗi API
-      if (!userEmail) {
-        userEmail = "customer@example.com"
-      }
-
-      // 2. GỬI EMAIL LÊN BACKEND
       const intentRes = await apiClientCart.post("/create-payment-intent", {
         email: userEmail,
       })
       const clientSecret = intentRes.data.clientSecret
 
-      // 3. XÁC NHẬN THANH TOÁN VỚI STRIPE
       const paymentResult = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement!,
           billing_details: {
-            email: userEmail, // Nên truyền vào để Stripe đối chiếu
+            email: userEmail,
           },
         },
       })
@@ -82,10 +73,7 @@ const CheckoutForm = ({
         setErrorMessage(paymentResult.error.message || "Payment failed")
       } else {
         if (paymentResult.paymentIntent.status === "succeeded") {
-          // Báo backend xử lý Database
           const response = await apiClientCart.post("/confirm-success")
-
-          // Chuyển sang SuccessPage
           if (response.data.success && response.data.payload) {
             navigate("/success", {
               state: { orderData: response.data.payload },
@@ -105,15 +93,12 @@ const CheckoutForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card className="p-6">
-        <h2 className="text-xl font-semibold mb-6">Payment Method (Stripe)</h2>
-        <div className="p-4 border rounded-md">
-          <CardElement options={{ hidePostalCode: true }} />
-        </div>
-        {errorMessage && (
-          <div className="text-destructive mt-4 text-sm">{errorMessage}</div>
-        )}
-      </Card>
+      <div className="p-4 border rounded-md bg-white">
+        <CardElement options={{ hidePostalCode: true }} />
+      </div>
+      {errorMessage && (
+        <div className="text-destructive mt-4 text-sm">{errorMessage}</div>
+      )}
 
       <Button
         type="submit"
@@ -126,16 +111,22 @@ const CheckoutForm = ({
         ) : (
           <Lock className="mr-2 h-4 w-4" />
         )}
-        {isProcessing ? "Processing..." : `Pay $${total.toFixed(2)}`}
+        {isProcessing
+          ? "Processing..."
+          : `Pay $${total.toFixed(2)} with Stripe`}
       </Button>
     </form>
   )
 }
 
-// --- COMPONENT TRANG CHÍNH ---
+// --- MAIN COMPONENT ---
 export function CheckoutPage() {
   const [cartItems, setCartItems] = useState<CartProps[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [paymentMethod, setPaymentMethod] = useState<"stripe" | "vnpay">(
+    "stripe",
+  )
+  const [isProcessingVNPay, setIsProcessingVNPay] = useState(false)
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -156,6 +147,30 @@ export function CheckoutPage() {
   const tax = subtotal * 0.1
   const total = subtotal + tax
 
+  // --- VNPAY HANDLER ---
+  const handleVNPayCheckout = async () => {
+    setIsProcessingVNPay(true)
+    try {
+      // VNPay requires VND. Convert USD to VND (Assuming rate is 25,400)
+      const exchangeRate = 25400
+      const amountInVND = Math.round(total * exchangeRate)
+
+      // Make sure the path matches your backend mapping setup
+      const response = await apiClientVNPay.post("/create-payment", {
+        amount: amountInVND,
+      })
+
+      if (response.data.paymentUrl) {
+        window.location.href = response.data.paymentUrl // Redirect to VNPay Gateway
+      }
+    } catch (error) {
+      console.error("VNPay initialization failed:", error)
+      alert("Failed to initialize VNPay. Please try again.")
+    } finally {
+      setIsProcessingVNPay(false)
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -169,11 +184,59 @@ export function CheckoutPage() {
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold mb-8">Checkout</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* LEFT COLUMN: STRIPE PAYMENT FORM */}
+          {/* LEFT COLUMN: PAYMENT METHOD SELECTION */}
           <div className="lg:col-span-2 space-y-6">
-            <Elements stripe={stripePromise}>
-              <CheckoutForm cartItems={cartItems} total={total} />
-            </Elements>
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-6">
+                Select Payment Method
+              </h2>
+
+              <div className="flex space-x-4 mb-8">
+                <Button
+                  variant={paymentMethod === "stripe" ? "default" : "outline"}
+                  onClick={() => setPaymentMethod("stripe")}
+                  className="flex-1"
+                >
+                  <CreditCard className="mr-2 h-4 w-4" /> Credit Card
+                </Button>
+                <Button
+                  variant={paymentMethod === "vnpay" ? "default" : "outline"}
+                  onClick={() => setPaymentMethod("vnpay")}
+                  className="flex-1"
+                >
+                  <Wallet className="mr-2 h-4 w-4" /> VNPay
+                </Button>
+              </div>
+
+              {/* RENDER SELECTED PAYMENT FORM */}
+              {paymentMethod === "stripe" ? (
+                <Elements stripe={stripePromise}>
+                  <CheckoutForm cartItems={cartItems} total={total} />
+                </Elements>
+              ) : (
+                <div className="space-y-6">
+                  <div className="p-4 border rounded-md bg-slate-50 text-slate-600 text-sm">
+                    You will be redirected to the secure VNPay gateway to
+                    complete your purchase using a local bank app or card.
+                  </div>
+                  <Button
+                    onClick={handleVNPayCheckout}
+                    disabled={isProcessingVNPay}
+                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    size="lg"
+                  >
+                    {isProcessingVNPay ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Lock className="mr-2 h-4 w-4" />
+                    )}
+                    {isProcessingVNPay
+                      ? "Redirecting..."
+                      : `Pay $${total.toFixed(2)} with VNPay`}
+                  </Button>
+                </div>
+              )}
+            </Card>
           </div>
 
           {/* RIGHT COLUMN: ORDER SUMMARY */}
@@ -201,7 +264,7 @@ export function CheckoutPage() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground text-center mt-4">
-                Secure checkout powered by Stripe
+                Secure checkout encrypted & protected
               </p>
             </Card>
           </div>
