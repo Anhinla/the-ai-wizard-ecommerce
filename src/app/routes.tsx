@@ -18,6 +18,7 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
 import { MyLearningPage } from './pages/MyLearningPage';
 import { CourseLearningPage } from './pages/CourseLearningPage';
+import { VNPayReturnPage } from './pages/VNReturnPage';
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
       { path: 'success', Component: SuccessPage },
       { path: 'history', Component: PurchaseHistoryPage },
       { path: 'profile', Component: ProfilePage },
+      {path:'vnpay_return',Component: VNPayReturnPage},
       { path: 'about', Component: AboutPage },
       { path: 'privacy', Component: PrivacyPage },
       { path: 'terms', Component: TermsPage },
