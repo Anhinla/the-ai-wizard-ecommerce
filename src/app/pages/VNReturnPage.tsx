@@ -60,7 +60,7 @@ export function VNPayReturnPage() {
             <CheckCircle2 className="h-16 w-16 text-green-500 mb-4" />
             <h2 className="text-2xl font-bold text-slate-800 mb-2">Success!</h2>
             <p className="text-slate-600 mb-6">{message}</p>
-            <Button onClick={() => navigate("/dashboard")} className="w-full">
+            <Button onClick={() => navigate("/")} className="w-full">
               Go to Dashboard
             </Button>
           </div>
