@@ -27,7 +27,7 @@ import {
   Camera,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export function ProfilePage() {
   const { user } = useAuth();

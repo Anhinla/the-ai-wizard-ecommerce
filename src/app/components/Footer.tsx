@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Wand2, Twitter, Github, Linkedin, Mail } from 'lucide-react';
 
 export function Footer() {

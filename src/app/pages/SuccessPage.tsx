@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router"
+import { useNavigate, useLocation } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Card } from "../components/ui/card"
 import { CheckCircle2, Download, ArrowRight, FileText } from "lucide-react"

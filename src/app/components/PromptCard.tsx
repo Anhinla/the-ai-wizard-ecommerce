@@ -2,7 +2,7 @@ import { Star, Eye, Download } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 interface PromptCardProps {
   id: string;
