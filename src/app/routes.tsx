@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
@@ -22,37 +22,37 @@ import { VNPayReturnPage } from './pages/VNReturnPage';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     Component: Layout,
     children: [
       { index: true, Component: LandingPage },
-      { path: 'prompts', Component: PromptsPage },
-      { path: 'prompts/:id', Component: PromptDetailPage },
-      { path: 'courses', Component: CoursesPage },
-      { path: 'courses/:id', Component: CourseDetailPage },
-      { path: 'community', Component: CommunityPage },
-      { path: 'cart', Component: CartPage },
-      { path: 'checkout', Component: CheckoutPage },
-      { path: 'success', Component: SuccessPage },
-      { path: 'history', Component: PurchaseHistoryPage },
-      { path: 'profile', Component: ProfilePage },
-      {path:'vnpay_return',Component: VNPayReturnPage},
-      { path: 'about', Component: AboutPage },
-      { path: 'privacy', Component: PrivacyPage },
-      { path: 'terms', Component: TermsPage },
-      { path: 'my-learning', Component: MyLearningPage },
+      { path: "prompts", Component: PromptsPage },
+      { path: "prompts/:id", Component: PromptDetailPage },
+      { path: "courses", Component: CoursesPage },
+      { path: "courses/:id", Component: CourseDetailPage },
+      { path: "community", Component: CommunityPage },
+      { path: "cart", Component: CartPage },
+      { path: "checkout", Component: CheckoutPage },
+      { path: "success", Component: SuccessPage },
+      { path: "history", Component: PurchaseHistoryPage },
+      { path: "profile", Component: ProfilePage },
+      { path: "vnpay_return", Component: VNPayReturnPage },
+      { path: "about", Component: AboutPage },
+      { path: "privacy", Component: PrivacyPage },
+      { path: "terms", Component: TermsPage },
+      { path: "my-learning", Component: MyLearningPage },
     ],
   },
   {
-    path: '/my-learning/:id',
+    path: "/my-learning/:id",
     Component: CourseLearningPage,
   },
   {
-    path: '/login',
+    path: "/login",
     Component: LoginPage,
   },
   {
-    path: '/signup',
+    path: "/signup",
     Component: SignupPage,
   },
-]);
+])
